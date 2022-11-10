@@ -2,6 +2,7 @@
 
 # class of controller
 class ElementsController < ApplicationController
+
   def index; end
 
   def self.power_of_5?(num)
@@ -49,6 +50,12 @@ class ElementsController < ApplicationController
       @array = params[:str_elem].split.map!(&:to_i)
       @array_of_pow = ElementsController.segments_of_powers(@array)
       @max_subarr = ElementsController.largest_segment(@array_of_pow)
+      respond_to do |format|
+        format.html
+        format.json do
+          render json: { type: @array_of_pow.class.to_s, value: [@length_of_arr, @array, @array_of_pow, @max_subarr] }
+        end
+      end
     end
   end
 

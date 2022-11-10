@@ -5,11 +5,14 @@
 
   <%= form_tag('/elements/result.json', :method => "get", remote:true, id:'form', class: 'form-control') do %>
     <%= label_tag("Enter length of sequence") %>
-    <%= number_field_tag :length, "1" , class: 'form-control' %> <br/>
+    <%= number_field_tag :length, "1" , class: 'form-control', id: 'number' %> <br/>
     <%= label_tag("Enter sequence") %>
-    <%= number_field_tag :str_elem, "1" , class: 'form-control' %> <br/>
+    <%= text_field_tag :str_elem, "1" , class: 'form-control', id: 'text' %> <br/>
     <%= submit_tag("calculate", class: 'btn btn-primary') %>
   <% end %>
-  <div id="res"></div>
-
+  <%if flash[:alert]%>
+    <div class = 'alert alert-danger' style = 'width: 60%;'><%=flash[:alert]%></div>
+  <%else%>
+   <table class="table table-bordered" id = "res" style = "width: 60%;"><tr><th>Task</th><th>Result of task</th></tr>
+  <%end%>
 

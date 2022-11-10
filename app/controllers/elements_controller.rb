@@ -40,20 +40,27 @@ class ElementsController < ApplicationController
         max_subarr = elem if max_subarr.length < elem.length
       end
     end
-    max_subarr
+    if max_subarr.nil? then '-'
+    else
+      max_subarr
+    end
+
   end
 
   def result
-    flash[:alert] = ElementsController.data_check(params[:length].to_i, params[:str_elem])
-    unless flash[:alert]
+    @error = ElementsController.data_check(params[:length].to_i, params[:str_elem])
+    if @error.nil?
       @length_of_arr = params[:length].to_i
       @array = params[:str_elem].split.map!(&:to_i)
       @array_of_pow = ElementsController.segments_of_powers(@array)
       @max_subarr = ElementsController.largest_segment(@array_of_pow)
-      respond_to do |format|
-        format.html
-        format.json do
-          render json: { type: @array_of_pow.class.to_s, value: [@length_of_arr, @array, @array_of_pow, @max_subarr] }
+    end
+    respond_to do |format|
+      format.html
+      format.json do
+        if !@error.nil? then render json: { type: 'Error', value: @error }
+        else
+          render json: { type: @array_of_pow.class.to_s, value: [@length_of_arr, @array, @array_of_pow, @max_subarr, @array_of_pow.length] }
         end
       end
     end

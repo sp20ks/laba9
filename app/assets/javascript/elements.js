@@ -16,6 +16,10 @@ function show_result(data){
     result.innerHTML += '<tr><td>Number of sequences of powers of 5</td><td>' + data.value[4] + '</td></tr>'
     result.innerHTML += '</table>'
   }
+  var num_field = document.getElementById('number')
+  var sequence_field = document.getElementById('text')
+  num_field.value = ''
+  sequence_field.value = ''
   }
 $(document).ready(function(){
   $("#form").bind("ajax:success", function(xhr, data, status)

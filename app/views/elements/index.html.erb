@@ -3,7 +3,7 @@
     Input sequence of positive integers separated by space
   </p>
 
-  <%= form_tag('/elements/result.json', :method => "get", remote:true, id:'form', class: 'form-control') do %>
+  <%= form_tag('/elements/result.json', :method => "get", remote:true, id:'form', class: 'form-control', style: 'width: 60%;') do %>
     <%= label_tag("Enter length of sequence") %>
     <%= number_field_tag :length, "1" , class: 'form-control', id: 'number' %> <br/>
     <%= label_tag("Enter sequence") %>

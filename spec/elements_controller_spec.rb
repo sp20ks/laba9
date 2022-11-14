@@ -20,7 +20,7 @@ RSpec.describe ElementsController, type: :controller do
 
   describe 'GET index' do
     it 'has a 200 status code' do
-      get :index
+      get :index, xhr: true
       expect(response.status).to eq(200)
     end
   end
@@ -28,7 +28,7 @@ end
 
 RSpec.describe ElementsController, type: 'request' do
   it 'expects to see sequences of powers of 5' do
-    get '/elements/result?length=7&str_elem=1+2+3+4+5+6+7'
+    get '/elements/result.json?length=7&str_elem=1+2+3+4+5+6+7'
     expect(assigns[:length_of_arr]).to eq(7)
   end
 

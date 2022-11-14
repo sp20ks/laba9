@@ -40,3 +40,54 @@ RSpec.describe ElementsController, type: 'request' do
     expect(assigns[:error]).to eq("Length isn't correct")
   end
 end
+
+RSpec.describe 'Test of page with Selenium' do
+  it 'check url of page' do
+    driver = Selenium::WebDriver.for :firefox
+    driver.get('localhost:3000')
+    expect(driver.current_url).to eq('http://localhost:3000/')
+    driver.quit
+  end
+
+  it 'show alert message about sequence error' do
+    driver = Selenium::WebDriver.for :firefox
+    driver.get('localhost:3000')
+    driver.manage.timeouts.implicit_wait = 500
+
+    num_field = driver.find_element(id: 'number')
+    sequence_field = driver.find_element(id: 'text')
+    btn = driver.find_element(id: 'btn')
+
+    num_field.send_keys(10)
+    sequence_field.send_keys('1 2 erer')
+    btn.click
+
+    alert = driver.switch_to.alert
+    alert_text = alert.text
+    alert.accept
+
+    expect(alert_text).to eq("Sequence isn't correct")
+    driver.quit
+  end
+
+  it 'show alert message about error with length' do
+    driver = Selenium::WebDriver.for :firefox
+    driver.get('localhost:3000')
+    driver.manage.timeouts.implicit_wait = 500
+
+    num_field = driver.find_element(id: 'number')
+    sequence_field = driver.find_element(id: 'text')
+    btn = driver.find_element(id: 'btn')
+
+    num_field.send_keys(10)
+    sequence_field.send_keys('1 2 3 4 5 6')
+    btn.click
+
+    alert = driver.switch_to.alert
+    alert_text = alert.text
+    alert.accept
+
+    expect(alert_text).to eq("Length isn't correct")
+    driver.quit
+  end
+end

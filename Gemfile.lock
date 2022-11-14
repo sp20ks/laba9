@@ -244,7 +244,7 @@ DEPENDENCIES
   rails (~> 7.0.4)
   rails-controller-testing
   rspec-rails (>= 3.9.0)
-  selenium-webdriver
+  selenium-webdriver (= 4.6.1)
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails

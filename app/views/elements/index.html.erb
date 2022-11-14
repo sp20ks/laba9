@@ -8,7 +8,7 @@
     <%= number_field_tag :length, "1" , class: 'form-control', id: 'number' %> <br/>
     <%= label_tag("Enter sequence") %>
     <%= text_field_tag :str_elem, "1" , class: 'form-control', id: 'text' %> <br/>
-    <%= submit_tag("calculate", class: 'btn btn-primary') %>
+    <%= submit_tag("calculate", class: 'btn btn-primary', id: 'btn') %>
   <% end %>
   <%if flash[:alert]%>
     <div class = 'alert alert-danger' style = 'width: 60%;'><%=flash[:alert]%></div>

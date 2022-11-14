@@ -33,10 +33,10 @@ RSpec.describe ElementsController, type: 'request' do
   end
 
   it 'alert message' do
-    get '/elements/result?length=7&str_elem=1+2+3+4+5+6+q'
-    expect(flash[:alert]).to eq("Sequence isn't correct")
+    get '/elements/result.json?length=7&str_elem=1+2+3+4+5+6+q'
+    expect(assigns[:error]).to eq("Sequence isn't correct")
 
-    get '/elements/result?length=4&str_elem=1+2+3+4+5+6'
-    expect(flash[:alert]).to eq("Length isn't correct")
+    get '/elements/result.json?length=4&str_elem=1+2+3+4+5+6'
+    expect(assigns[:error]).to eq("Length isn't correct")
   end
 end
